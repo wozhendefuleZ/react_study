@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Products } from './interfaces/app';
-import { ListItems } from './components/ListItems';
+import { Products } from '@/interfaces/app';
+import { ListItems ,ObjectItem } from '@/components/ListItems';
 
 function App() {
   useEffect(() => {
@@ -13,6 +13,9 @@ function App() {
     { title: 'Apple', isFruit: true, id: 3 },
   ];
   const [list, setList] = useState(products);
+
+
+
   return (
     <>
       <div className="flex items-center h-100vh justify-center">
@@ -21,6 +24,8 @@ function App() {
             list={list}
             listClick={(e: Array<Products>) => setList(e)}
           ></ListItems>
+
+          <ObjectItem></ObjectItem>
         </div>
       </div>
     </>

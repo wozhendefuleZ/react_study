@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Products } from '@/interfaces/app';
-import { ListItems ,ObjectItem } from '@/components/ListItems';
+import { ListItems } from '@/components/ListItems';
 
 function App() {
   useEffect(() => {
@@ -8,8 +8,8 @@ function App() {
   }, []); // 数组内有变量那么变动是会继续触发
 
   const products: Array<Products> = [
-    { title: 'Cabbage', isFruit: false, id: 1 },
-    { title: 'Garlic', isFruit: false, id: 2 },
+    { title: 'Cabbage', isFruit: true, id: 1 },
+    { title: 'Garlic', isFruit: true, id: 2 },
     { title: 'Apple', isFruit: true, id: 3 },
   ];
   const [list, setList] = useState(products);
@@ -25,7 +25,6 @@ function App() {
             listClick={(e: Array<Products>) => setList(e)}
           ></ListItems>
 
-          <ObjectItem></ObjectItem>
         </div>
       </div>
     </>

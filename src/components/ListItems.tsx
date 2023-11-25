@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Products, List } from '@/interfaces/app';
 import { useImmer } from 'use-immer';
 
-// 操作数组
+// 操作数组-useState and 组件通讯
 export const ListItems = (props: List) => {
   const changeStatus = (e: Products) => {
     const newList = props.list.map((v: Products) => {
@@ -20,7 +20,45 @@ export const ListItems = (props: List) => {
     <div
       key={e.id}
       onClick={() => changeStatus(e)}
-      className={[e.isFruit ? 'text-red' : 'text-green', 'mt-10px'].join(' ')}
+      className={[
+        e.isFruit ? 'text-red' : 'text-green',
+        'mt-10px cursor-pointer',
+      ].join(' ')}
+    >
+      {e.title}
+    </div>
+  ));
+
+  return <>{productsList}</>;
+};
+
+// 操作数组-useImmer
+export const ListImmer = () => {
+  const products: Array<Products> = [
+    { title: 'Cabbage', isFruit: false, id: 1 },
+    { title: 'Garlic', isFruit: false, id: 2 },
+    { title: 'Apple', isFruit: false, id: 3 },
+  ];
+  const [list, setList] = useImmer(products);
+
+  const changeStatus = (e: Products) => {
+    setList((draft) => {
+      draft.find((v: Products) => {
+        if (v.id == e.id) {
+          v.isFruit = !e.isFruit;
+        }
+      });
+    });
+  };
+
+  const productsList = list.map((e: Products) => (
+    <div
+      key={e.id}
+      onClick={() => changeStatus(e)}
+      className={[
+        e.isFruit ? 'text-blue' : 'text-orange',
+        'mt-10px cursor-pointer',
+      ].join(' ')}
     >
       {e.title}
     </div>
@@ -31,6 +69,7 @@ export const ListItems = (props: List) => {
 
 // 操作对象
 export const ObjectItem = () => {
+  // 操作对象-useState
   const [person, setPerson] = useState({
     name: 'Niki de Saint Phalle',
     artwork: {
@@ -55,6 +94,7 @@ export const ObjectItem = () => {
     });
   };
 
+  // 操作对象-useImmer
   const [people, setPeople] = useImmer({
     artwork: {
       city: 'city',

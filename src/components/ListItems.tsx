@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Products, List } from '@/interfaces/app';
+import { useImmer } from 'use-immer';
 
 // 操作数组
 export const ListItems = (props: List) => {
@@ -34,7 +35,6 @@ export const ObjectItem = () => {
     name: 'Niki de Saint Phalle',
     artwork: {
       title: 'Blue Nana',
-      city: 'Hamburg',
     },
   });
 
@@ -54,15 +54,26 @@ export const ObjectItem = () => {
       },
     });
   };
+
+  const [people, setPeople] = useImmer({
+    artwork: {
+      city: 'city',
+    },
+  });
+  const changeCity = (e: any) => {
+    setPeople((v) => {
+      v.artwork.city = e.target.value;
+    });
+  };
   return (
     <div className="mt-20px">
       <input type="text" onChange={changeName} value={person.name} />
       <input type="text" onChange={changeTitle} value={person.artwork.title} />
-      <input type="text" value={person.artwork.city} />
+      <input type="text" onChange={changeCity} value={people.artwork.city} />
 
       <div>{person.name}</div>
       <div>{person.artwork.title}</div>
-      <div>{person.artwork.city}</div>
+      <div>{people.artwork.city}</div>
     </div>
   );
 };

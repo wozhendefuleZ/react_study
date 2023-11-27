@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Products } from '@/interfaces/app';
 import { ListItems } from '@/components/ListItems';
+import { CatFriends } from '@/components/ImgList';
 
 function App() {
   useEffect(() => {
@@ -14,17 +15,17 @@ function App() {
   ];
   const [list, setList] = useState(products);
 
-
-
   return (
     <>
-      <div className="flex items-center h-100vh justify-center">
+      <div className="flex items-center h-100vh justify-center overflow-hidden">
         <div>
           <ListItems
             list={list}
             listClick={(e: Array<Products>) => setList(e)}
           ></ListItems>
-
+          <div className="w-500px">
+            <CatFriends></CatFriends>
+          </div>
         </div>
       </div>
     </>

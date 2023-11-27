@@ -1,7 +1,20 @@
-import { useRef, useState } from 'react';
+// forwardRef 获取子组件得Dom
+import { useRef, useState, forwardRef } from 'react';
+// flushSync 立即执行函数
 import { flushSync } from 'react-dom';
+type Img = {
+  id: string;
+  imageUrl: string;
+};
+const catList: Array<Img> = [];
+for (let i = 0; i < 10; i++) {
+  catList.push({
+    id: i + '',
+    imageUrl: 'https://placekitten.com/250/200?image=' + i,
+  });
+}
 
-export function CatFriends() {
+export const CatFriends = () => {
   const selectedRef = useRef<any>(null);
   const [index, setIndex] = useState(0);
 
@@ -43,16 +56,12 @@ export function CatFriends() {
       </div>
     </>
   );
-}
-
-type Img = {
-  id: string;
-  imageUrl: string;
 };
-const catList: Array<Img> = [];
-for (let i = 0; i < 10; i++) {
-  catList.push({
-    id: i + '',
-    imageUrl: 'https://placekitten.com/250/200?image=' + i,
-  });
-}
+
+export const SearchInp = forwardRef((props: any, ref: any) => {
+  return (
+    <>
+      <input type="text" ref={ref} placeholder={props.text} />
+    </>
+  );
+});

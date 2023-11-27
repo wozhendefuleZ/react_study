@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Products } from '@/interfaces/app';
 import { ListItems } from '@/components/ListItems';
-import { CatFriends } from '@/components/ImgList';
+import { SearchInp } from '@/components/ImgList';
 
 function App() {
   useEffect(() => {
@@ -15,6 +15,8 @@ function App() {
   ];
   const [list, setList] = useState(products);
 
+  const inpDom = useRef<any>(null);
+
   return (
     <>
       <div className="flex items-center h-100vh justify-center overflow-hidden">
@@ -23,8 +25,9 @@ function App() {
             list={list}
             listClick={(e: Array<Products>) => setList(e)}
           ></ListItems>
-          <div className="w-500px">
-            <CatFriends></CatFriends>
+          <div className="w-500px mt-20px">
+            <button onClick={() => inpDom.current.focus()}>获取焦点</button>
+            <SearchInp ref={inpDom} text={'请输入'}></SearchInp>
           </div>
         </div>
       </div>

@@ -13,15 +13,13 @@ const Home = () => {
   const inpDom = useRef<any>(null);
   return (
     <>
-      <div>
-        <ListItems
-          list={list}
-          listClick={(e: Array<Products>) => setList(e)}
-        ></ListItems>
-        <div className="w-500px mt-20px">
-          <button onClick={() => inpDom.current.focus()}>获取焦点</button>
-          <SearchInp ref={inpDom} text={'请输入'}></SearchInp>
-        </div>
+      <ListItems
+        list={list}
+        listClick={(e: Array<Products>) => setList(e)}
+      ></ListItems>
+      <div className="w-500px mt-20px">
+        <button onClick={() => inpDom.current.focus()}>获取焦点</button>
+        <SearchInp ref={inpDom} text={'请输入'}></SearchInp>
       </div>
     </>
   );

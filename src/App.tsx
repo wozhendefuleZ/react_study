@@ -3,7 +3,7 @@ import routes from './router';
 
 function App() {
   const ElementRouter = useRoutes(routes);
-  return <div className="h-100vh overflow-hidden">{ElementRouter}</div>;
+  return <>{ElementRouter}</>;
 }
 
 export default App;

@@ -3,7 +3,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { Menu, Layout } from 'antd';
 import items from '@/components/Items';
 import Header from '@/components/Header';
-import './layout.css';
+import './index.css';
 
 const LayOut = () => {
   const [expanded, setExpanded] = useState(false);

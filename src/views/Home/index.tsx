@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 import { Products } from '@/interfaces/app';
-import { ListItems } from '@/components/ListItems';
-import { SearchInp } from '@/components/ImgList';
+import { ListItems } from '@/views/Home/component/ListItems';
+import { SearchInp, CatFriends } from '@/views/Home/component/ImgList';
 
 const Home = () => {
   const products: Array<Products> = [
@@ -17,9 +17,10 @@ const Home = () => {
         list={list}
         listClick={(e: Array<Products>) => setList(e)}
       ></ListItems>
-      <div className="w-500px mt-20px">
+      <div className="mt-20px">
         <button onClick={() => inpDom.current.focus()}>获取焦点</button>
         <SearchInp ref={inpDom} text={'请输入'}></SearchInp>
+        <CatFriends></CatFriends>
       </div>
     </>
   );

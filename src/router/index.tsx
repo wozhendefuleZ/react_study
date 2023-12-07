@@ -1,8 +1,8 @@
 import { Navigate } from 'react-router-dom';
 import { lazy } from 'react';
 // import AuthComponent from '@/components/authComponent';
-import Layout from '@/views/layout';
-const Home = lazy(() => import('@/views/home'));
+import Layout from '@/views/Layout';
+const Home = lazy(() => import('@/views/Home'));
 const routes = [
   { path: '', element: <Navigate to="/layout/home" /> },
   {

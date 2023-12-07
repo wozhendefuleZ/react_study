@@ -1,14 +1,28 @@
 import { useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
+import { Menu, Layout } from 'antd';
+import items from '@/components/Items';
 import Header from '@/components/Header';
-import Slider from '@/components/Slider';
+import './layout.css';
 
-const Layout = () => {
-  const [expanded, setExpanded] = useState(true);
+const LayOut = () => {
+  const [expanded, setExpanded] = useState(false);
+  const { pathname } = useLocation();
 
+  const { Sider } = Layout;
   return (
     <div className="h-100vh overflow-hidden flex bg-#f5f5f5">
-      <Slider expanded={expanded}></Slider>
+      <Sider trigger={null} collapsible collapsed={expanded} className="p-0">
+        <div className="h-60px my-10px"></div>
+        <Menu
+          theme="dark"
+          mode="inline"
+          defaultSelectedKeys={[pathname]}
+          selectedKeys={[pathname]}
+          items={items}
+        />
+      </Sider>
+
       <div className="flex-1 w-0 flex flex-col">
         <Header
           expanded={expanded}
@@ -26,4 +40,4 @@ const Layout = () => {
   );
 };
 
-export default Layout;
+export default LayOut;

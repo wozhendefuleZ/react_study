@@ -57,7 +57,7 @@ const Preview = (props: any) => {
       <div className="preview-container">
         <img
           src={imgUrl}
-          className="max-h-100vh select-none"
+          className="max-h-100vh max-w-100vw select-none"
           alt="Preview Image"
         />
       </div>

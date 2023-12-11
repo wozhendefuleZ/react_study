@@ -20,7 +20,9 @@ const Home = () => {
       <div className="mt-20px">
         <button onClick={() => inpDom.current.focus()}>获取焦点</button>
         <SearchInp ref={inpDom} text={'请输入'}></SearchInp>
-        <CatFriends></CatFriends>
+        <div className="w-800px">
+          <CatFriends></CatFriends>
+        </div>
       </div>
     </>
   );

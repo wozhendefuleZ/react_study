@@ -3,7 +3,7 @@ import { HomeOutlined } from '@ant-design/icons';
 function getItem(
   label: any,
   key: string,
-  icon: any,
+  icon?: any,
   children?: any,
   type?: any
 ) {

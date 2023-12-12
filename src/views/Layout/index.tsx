@@ -12,7 +12,12 @@ const LayOut = () => {
   const { Sider } = Layout;
   return (
     <div className="h-100vh overflow-hidden flex bg-#f5f5f5">
-      <Sider trigger={null} collapsible collapsed={expanded} className="p-0">
+      <Sider
+        trigger={null}
+        collapsible
+        collapsed={expanded}
+        className="p-0 transition-all duration-300"
+      >
         <div className="h-60px my-10px"></div>
         <Menu
           theme="dark"

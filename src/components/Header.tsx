@@ -23,7 +23,7 @@ const Header = (porps: any) => {
         }
       )}
 
-      <div className="ml-auto text-18px">
+      <div className="ml-auto text-18px cursor-pointer">
         <Popconfirm
           onConfirm={onConfirm}
           title="是否确认退出？"

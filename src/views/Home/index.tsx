@@ -2,6 +2,16 @@ import { useState, useRef } from 'react';
 import { Products } from '@/interfaces/app';
 import { ListItems } from '@/views/Home/component/ListItems';
 import { SearchInp, CatFriends } from '@/views/Home/component/ImgList';
+import { motion } from 'framer-motion';
+import Dialog from '@/components/Dialog/Dialog';
+
+function DialogContent() {
+  return (
+    <div className="flex-auto grid place-content-center shadow w-900px">
+      dwqqdqw
+    </div>
+  );
+}
 
 const Home = () => {
   const products: Array<Products> = [
@@ -11,6 +21,7 @@ const Home = () => {
   ];
   const [list, setList] = useState(products);
   const inpDom = useRef<any>(null);
+
   return (
     <>
       <ListItems
@@ -24,6 +35,17 @@ const Home = () => {
           <CatFriends></CatFriends>
         </div>
       </div>
+
+      <motion.button
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        className="text-white text-[12px] p-[6px_18px] bg-green-500 rounded-md shadow-lg shadow-green-500/70 select-none"
+        onClick={() => {
+          Dialog.show(<DialogContent />);
+        }}
+      >
+        click here~
+      </motion.button>
     </>
   );
 };

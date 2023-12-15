@@ -29,7 +29,7 @@ const Preview = (props: any) => {
         }
       },
       change: (): void => {
-        props.changeShow(!props.showPreview);
+        props.changeShow(!props.showPreview, props.index);
       },
     };
 

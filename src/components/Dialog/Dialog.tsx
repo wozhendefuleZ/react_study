@@ -6,9 +6,11 @@ import { Icon } from '@iconify/react';
 const Dialog = ({
   onDestroy,
   node,
+  title,
 }: {
   onDestroy: () => void;
   node?: React.ReactNode;
+  title?: React.ReactNode;
 }) => {
   const [show, setShow] = useState(false);
   const index = useRef(-1);
@@ -24,6 +26,27 @@ const Dialog = ({
     setShow(true);
     index.current = hooks.push(close) - 1;
   }, [close]);
+
+  const baseTitle = (
+    <>
+      <div className="flex gap-[5px] items-center">
+        <span className="text-[18px]">🧀</span>
+      </div>
+      <div className="ml-auto">
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          onClick={close}
+        >
+          <Icon
+            icon="heroicons:x-circle-20-solid"
+            className="text-[25px] text-red-500"
+          />
+        </motion.button>
+      </div>
+    </>
+  );
+
   return (
     <AnimatePresence>
       {show && (
@@ -44,22 +67,9 @@ const Dialog = ({
             onClick={(e) => e.stopPropagation()}
           >
             <div className="border-b border-b-solid border-b-gray-300 p-[8px_16px] flex">
-              <div className="flex gap-[5px] items-center">
-                <span className="text-[18px]">🧀</span>
-              </div>
-              <div className="ml-auto">
-                <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  onClick={close}
-                >
-                  <Icon
-                    icon="heroicons:x-circle-20-solid"
-                    className="text-[25px] text-red-500"
-                  />
-                </motion.button>
-              </div>
+              {title ? title : baseTitle}
             </div>
+            {/* 内容区域 */}
             {node}
           </motion.div>
         </motion.div>
@@ -80,7 +90,11 @@ const removeEventListener = () => {
   hooks.length < 1 && document.removeEventListener('keydown', closeHandle);
 };
 
-const show = (component?: React.ReactNode) => {
+const closeDialog = () => {
+  hooks[hooks.length - 1]?.();
+};
+
+const show = (component?: React.ReactNode, title?: React.ReactNode) => {
   const dialog = document.createElement('div');
   createRoot(dialog).render(
     <Dialog
@@ -88,10 +102,11 @@ const show = (component?: React.ReactNode) => {
         dialog.remove();
       }}
       node={component}
+      title={title}
     />
   );
   document.body.appendChild(dialog);
   document.addEventListener('keydown', closeHandle);
 };
 
-export default { show };
+export default { show, closeDialog };

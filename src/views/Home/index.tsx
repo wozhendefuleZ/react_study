@@ -3,13 +3,32 @@ import { Products } from '@/interfaces/app';
 import { ListItems } from '@/views/Home/component/ListItems';
 import { SearchInp, CatFriends } from '@/views/Home/component/ImgList';
 import { motion } from 'framer-motion';
+import { Icon } from '@iconify/react';
+
 import Dialog from '@/components/Dialog/Dialog';
 
 function DialogContent() {
+  return <div className="flex-auto grid place-items-center shadow"></div>;
+}
+function DialogTitle() {
   return (
-    <div className="flex-auto grid place-content-center shadow w-900px">
-      dwqqdqw
-    </div>
+    <>
+      <div className="flex gap-[5px] items-center">
+        <span className="text-[18px]">自定义dialog</span>
+      </div>
+      <div className="ml-auto">
+        <motion.div
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          onClick={Dialog.closeDialog}
+        >
+          <Icon
+            icon="heroicons:x-circle-20-solid"
+            className="text-[25px] text-red-500 cursor-pointer"
+          />
+        </motion.div>
+      </div>
+    </>
   );
 }
 
@@ -21,6 +40,7 @@ const Home = () => {
   ];
   const [list, setList] = useState(products);
   const inpDom = useRef<any>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   return (
     <>
@@ -37,11 +57,13 @@ const Home = () => {
       </div>
 
       <motion.button
+        ref={buttonRef}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         className="text-white text-[12px] p-[6px_18px] bg-green-500 rounded-md shadow-lg shadow-green-500/70 select-none"
         onClick={() => {
-          Dialog.show(<DialogContent />);
+          if (buttonRef.current) buttonRef.current.blur();
+          Dialog.show(<DialogContent />, <DialogTitle />);
         }}
       >
         click here~
